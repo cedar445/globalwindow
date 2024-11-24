@@ -1,0 +1,27 @@
+html {
+  background: #f0f0f0;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#app {
+  margin: 0 auto;
+  padding: 0rem;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.n-card {
+  background-color: transparent !important;
+}
+
+.n-card-header {
+  background-color: transparent !important;
+}

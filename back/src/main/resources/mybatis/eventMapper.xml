@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxq.globalwindow.mapper.eventMapper">
+    <update id="setTimeLink">
+        update event set timeLink = #{timeLink} where eventId = #{eventId}
+    </update>
+    <update id="setevent">
+        insert into event values (#{eventId},#{keyword},#{event},#{popularity}) on duplicate key update event = #{event}, popularity = #{popularity}
+    </update>
+    <select id="findAllEvent" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event
+    </select>
+    <select id="findByeventId" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event where eventId = #{eventId}
+    </select>
+    <select id="findHotBysource" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event where source = #{source} and time >= #{time} order by popularity desc limit #{num}
+    </select>
+    <select id="findRBykeyword" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event where keyword like CONCAT('%', #{keyword}, '%') order by popularity desc limit #{num}
+    </select>
+    <select id="findByTimeLink" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event where timeLink = #{timeLink}
+    </select>
+    <select id="getkeywordsByeventId" resultType="java.lang.String">
+        select keyword from event where eventId = #{eventId}
+    </select>
+    <select id="findRBypopularity" resultType="com.zxq.globalwindow.pojo.event">
+        select * from event where time >= #{time} order by popularity desc limit #{num}
+    </select>
+</mapper>

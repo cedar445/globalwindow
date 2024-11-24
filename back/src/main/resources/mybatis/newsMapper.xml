@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxq.globalwindow.mapper.newsMapper">
+    <update id="setnewsEventId">
+        update news set eventId = #{eventId} where newsId = #{newsId}
+    </update>
+    <update id="updatenews_popularity">
+        update news set popuarity = #{popularity} where newsId = #{newsId}
+    </update>
+    <update id="updatenews_type">
+        update news set type = #{type} where newsId = #{newsId}
+    </update>
+    <select id="findBynewsId" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where newsId = #{newsId}
+    </select>
+    <select id="findBypopularity" resultType="com.zxq.globalwindow.pojo.news">
+        SELECT * from news where source not like '%学习强国%' order by popularity desc limit #{num}
+    </select>
+    <select id="findHotBytype" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where type = #{type} and source not like '%学习强国%' order by popularity desc limit #{num}
+    </select>
+    <select id="findBytype" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where type = #{type} and source not like '%学习强国%'
+    </select>
+    <select id="findBysource" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where source = #{source}
+    </select>
+    <select id="findHotBysource" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where source = #{source} order by popularity desc limit #{num}
+    </select>
+    <select id="findByeventId" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where eventId = #{eventId}
+    </select>
+    <select id="findHotByeventId" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where eventId = #{eventId} order by popularity desc limit #{num}
+    </select>
+    <select id="getnewsIdBylink" resultType="java.lang.Integer">
+        select newsId from news where link = #{link}
+    </select>
+    <select id="getNewsByX" resultType="com.zxq.globalwindow.pojo.news">
+        select * from news where source = '学习强国' limit #{limitNum}
+    </select>
+    <select id="getNewsImages" resultType="java.lang.String">
+        select picturelink from news where source = '学习强国-图' limit #{num}
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxq.globalwindow.mapper.commentMapper">
+    <select id="findBycommentId" resultType="com.zxq.globalwindow.pojo.comment">
+        select * from comment where commentId = #{commentId}
+    </select>
+    <select id="findBynewsId" resultType="com.zxq.globalwindow.pojo.comment">
+        select * from comment where newsId = #{newsId}
+    </select>
+    <select id="findHotBynewsId" resultType="com.zxq.globalwindow.pojo.comment">
+        select * from comment where newsId = #{newsId} order by likeNum limit #{num}
+    </select>
+    <update id="setcomment">
+        insert into comment values (#{comment},#{attitude},#{time},#{source},#{newsId},#{emotion},#{likeNum})
+    </update>
+</mapper>

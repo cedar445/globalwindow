@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxq.globalwindow.mapper.keywordMapper">
+    <update id="setkeyword">
+        insert ignore into keyword(keyword) values (#{keyword})
+    </update>
+    <update id="updatekeyword_frequency">
+        update keyword set frequency = #{frequency} where keyword = #{keyword}
+    </update>
+    <select id="findBykeyword" resultType="com.zxq.globalwindow.pojo.keyword">
+        select * from keyword where keyword = #{keyword}
+    </select>
+    <select id="findAllBykeyword" resultType="com.zxq.globalwindow.pojo.keyword">
+        select * from keyword where keyword like CONCAT('%', #{keyword}, '%') limit #{num}
+    </select>
+    <select id="findByfrequency" resultType="com.zxq.globalwindow.pojo.keyword">
+        SELECT * from keyword order by frequency desc limit #{num}
+    </select>
+    <select id="findAllkeyword" resultType="com.zxq.globalwindow.pojo.keyword">
+        select * from keyword
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxq.globalwindow.mapper.news_keywordsMapper">
+    <update id="setnews_keywords">
+        insert ignore into news_keywords values (#{newsId},#{keyword})
+    </update>
+    <select id="getkeywordBynewsId" resultType="java.lang.String">
+        select keyword from news_keywords where newsId = #{newsId}
+    </select>
+    <select id="getnewsIdBykeyword" resultType="java.lang.Integer">
+        select news.newsId from news_keywords join news on news_keywords.newsId = news.newsId where keyword = #{keyword}
+    </select>
+    <select id="getHotnewsIdBykeyword" resultType="java.lang.Integer">
+        select news.newsId from news_keywords join news on news_keywords.newsId = news.newsId where keyword = #{keyword} order by news.popularity limit #{num}
+    </select>
+    <select id="getRHotnewsIdBykeyword" resultType="java.lang.Integer">
+        select news.newsId from news_keywords join news on news_keywords.newsId = news.newsId where keyword like CONCAT('%', #{keyword}, '%') order by news.popularity limit #{num}
+    </select>
+</mapper>
